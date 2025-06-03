@@ -34,8 +34,12 @@ fetchProducts()
         
         ${all_product_data.map((productItem)=>{
           // return console.log(productItem.title);
+          let x = productItem.rating;
+          let rating_point_length = 1;
+          let finalRating = Math.round(x * Math.pow(10,rating_point_length)) / Math.pow(10, rating_point_length);
+          // console.log(finalRating);
           return `
-            <div id="prd${productItem.id}" class="product position-relative px-3 py-3 mx-2" style="width: 18%; height: max-content; border-radius: 8px;">
+            <div id="prd${productItem.id}" class="product position-relative px-3 py-3 mx-2 my-2" style="width: 18%; height: max-content; border-radius: 8px;">
         <div class="pro-tags position-absolute" style="z-index: 999; top: 3%; height: max-content;">
           <div class="pt bg-danger text-white mb-2 mt-2">${Math.floor(productItem.discountPercentage)}%</div>
           <div class="pt bg-success text-white">Sale</div>
@@ -73,38 +77,38 @@ fetchProducts()
         </div>
         <div class="product-rating d-flex justify-content-between">
           <div class="stars">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"
               class="bi bi-star-fill">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"
               class="bi bi-star-fill">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"
               class="bi bi-star-fill">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"
               class="bi bi-star-fill">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" id="5" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" id="5" viewBox="0 0 16 16" width="12" height="12"
               class="bi bi-star-fill">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
           </div>
-          <div class="point" id="R_point${productItem.id}"><span>${Math.floor(productItem.rating)}</span></div>
+          <div class="point">(<span id="R_point${productItem.id}">${finalRating}</span>)</div>
         </div>
          <div class="stok-status">
           <p>${productItem.availabilityStatus}</p>
@@ -118,7 +122,7 @@ fetchProducts()
       </div>
           
           ` 
-        })}
+        }).join("")}
         
         `
       }
@@ -126,45 +130,109 @@ fetchProducts()
 
 
       // script fot bootstrap tooltip
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
       // product rating functionality adding
       let productStartRating = document.querySelectorAll(".point");
       let select_product_star = document.querySelector(".stars");
       
+      
       // product rating functionality adding
       for(let pt = 0; pt<productStartRating.length; pt++){
         //  console.log(productStartRating[pt].id);
-         let pd_rating_point_id = document.getElementById(productStartRating[pt].id);
-
+         let pd_rating_point_id = document.getElementById(productStartRating[pt].firstElementChild.id);
          let rt_point_text = pd_rating_point_id.innerText;
-         let star_rating_icons_parent = pd_rating_point_id.parentElement.firstElementChild;
+         let star_rating_icons_parent = pd_rating_point_id.parentElement.parentElement.firstElementChild;
 
+        
+              let new_star = document.createElement("span");
+              new_star.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" class="bi bi-star-half text-warning" style="fill: #ffa534;"><path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"></path></svg>`
          
-         if(rt_point_text == 4){
+
+
+        //  if(rt_point_text = 4){
+        //       star_rating_icons_parent.children[0].style.fill = "#ffa534";
+        //       star_rating_icons_parent.children[1].style.fill = "#ffa534";
+        //       star_rating_icons_parent.children[2].style.fill = "#ffa534";
+        //       star_rating_icons_parent.children[3].style.fill = "#ffa534";
+        //  }
+        //  if(rt_point_text = 3){
+        //       star_rating_icons_parent.children[0].style.fill = "#ffa534";
+        //       star_rating_icons_parent.children[1].style.fill = "#ffa534";
+        //       star_rating_icons_parent.children[2].style.fill = "#ffa534";
+        //  }
+        //  if(rt_point_text = 2){
+        //       star_rating_icons_parent.children[0].style.fill = "#ffa534";
+        //       star_rating_icons_parent.children[1].style.fill = "#ffa534";
+        //  }
+        //  if(rt_point_text = 1){
+        //       star_rating_icons_parent.children[0].style.fill = "#ffa534";
+        //  }
+         
+        if(rt_point_text == 5){
+              star_rating_icons_parent.children[0].style.fill = "#ffa534";
+              star_rating_icons_parent.children[1].style.fill = "#ffa534";
+              star_rating_icons_parent.children[2].style.fill = "#ffa534";
+              star_rating_icons_parent.children[3].style.fill = "#ffa534";
+              star_rating_icons_parent.children[4].style.fill = "#ffa534";
+        }
+        else if(rt_point_text == 4){
+             star_rating_icons_parent.children[0].style.fill = "#ffa534";
+              star_rating_icons_parent.children[1].style.fill = "#ffa534";
+              star_rating_icons_parent.children[2].style.fill = "#ffa534";
+              star_rating_icons_parent.children[3].style.fill = "#ffa534";
+        }else if(rt_point_text == 3){
+              star_rating_icons_parent.children[0].style.fill = "#ffa534";
+              star_rating_icons_parent.children[1].style.fill = "#ffa534";
+              star_rating_icons_parent.children[2].style.fill = "#ffa534";
+        }else if(rt_point_text == 2){
+              star_rating_icons_parent.children[0].style.fill = "#ffa534";
+              star_rating_icons_parent.children[1].style.fill = "#ffa534";
+        }else if(rt_point_text == 1){
+              star_rating_icons_parent.children[0].style.fill = "#ffa534";
+        }
+        else if(rt_point_text >= 4.1){
             console.log("4 star is found");
             console.log(star_rating_icons_parent);
               star_rating_icons_parent.children[0].style.fill = "#ffa534";
               star_rating_icons_parent.children[1].style.fill = "#ffa534";
               star_rating_icons_parent.children[2].style.fill = "#ffa534";
               star_rating_icons_parent.children[3].style.fill = "#ffa534";
-         }else if(rt_point_text == 3){
+              let old_star = star_rating_icons_parent.children[4];
+              star_rating_icons_parent.replaceChild(new_star,old_star);
+         }
+         else if(rt_point_text >= 3){
               star_rating_icons_parent.children[0].style.fill = "#ffa534";
               star_rating_icons_parent.children[1].style.fill = "#ffa534";
               star_rating_icons_parent.children[2].style.fill = "#ffa534";
-         }else if(rt_point_text == 2){
+              let old_star = star_rating_icons_parent.children[3];
+              star_rating_icons_parent.replaceChild(new_star,old_star);
+         }
+         else if(rt_point_text = 2){
               star_rating_icons_parent.children[0].style.fill = "#ffa534";
               star_rating_icons_parent.children[1].style.fill = "#ffa534";
-           
-         }else if(rt_point_text == 1){
+              star_rating_icons_parent.replaceChild(new_star,star_rating_icons_parent.children[2])
+              
+          }
+          else if(rt_point_text >= 1){
               star_rating_icons_parent.children[0].style.fill = "#ffa534";
-         }
-         else{console.log("nothing")};
-          console.log(rt_point_text);
+              star_rating_icons_parent.replaceChild(new_star,star_rating_icons_parent.children[1])
+            }
+            else{
+               star_rating_icons_parent.children[0].style.fill = "#a7a7a7";
+               star_rating_icons_parent.children[1].style.fill = "#a7a7a7";
+               star_rating_icons_parent.children[2].style.fill = "#a7a7a7";
+               star_rating_icons_parent.children[3].style.fill = "#a7a7a7";
+               star_rating_icons_parent.children[4].style.fill = "#a7a7a7";
+            }
+          // console.log(rt_point_text);
         }
 
 
+
+        // add to cart functionality
+        
    })
 
 
