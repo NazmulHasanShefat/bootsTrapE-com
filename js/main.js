@@ -116,7 +116,7 @@ fetchProducts()
         <div class="p-bottom-section d-flex align-items-center justify-content-between mt-3">
         <div class="price"> <strong>$${productItem.price}</strong> <span class="old-price"> $25.5</span></div>
           <div class="add-tocart-button">
-            <button style="border-radius: 4px;" class="px-3 py-1 text-white">+Add</button>
+            <button style="border-radius: 4px;" class="px-3 py-1 text-white" data-bs-toggle="offcanvas" data-bs-target="#cart_tab" aria-controls="cart_tab" >+Add</button>
           </div>
         </div>
       </div>
