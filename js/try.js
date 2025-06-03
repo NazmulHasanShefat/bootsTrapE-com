@@ -1,40 +1,13 @@
-   var swiper = new Swiper(".mySwiper", {
-      pagination: {
-        el: ".swiper-pagination",
-      },
-    });
+let p = document.querySelector("x");
+p.innerHTML = `
 
-async function fetchProducts() {
-  try{
-    let res = await fetch("https://dummyjson.com/products");
-    const myProduct = res.json();
-    return myProduct;
-  }
-  catch (error){
-    console.error("faild to fetch products",error);
-    return error
-  }
-}
-fetchProducts()
-   .then(product_data =>{
-    console.log(product_data);
-      let all_product_data = product_data.products;
-      console.log(all_product_data);
-      
-      function addProduct_from_api(){
-        let product_list_container = document.querySelector(".products-list-container");
-        product_list_container.innerHTML = `
-        
-        ${all_product_data.map((productItem)=>{
-          // return console.log(productItem.title);
-          return `
-            <div id="prd${productItem.id}" class="product position-relative px-3 py-3 mx-2" style="width: 18%; height: max-content; border-radius: 8px;">
+<div class="product position-relative px-3 py-3 mx-2" style="width: 20%; height: max-content; border-radius: 8px;">
         <div class="pro-tags position-absolute" style="z-index: 999; top: 3%; height: max-content;">
-          <div class="pt bg-danger text-white mb-2 mt-2">${Math.floor(productItem.discountPercentage)}%</div>
+          <div class="pt bg-danger text-white mb-2 mt-2">40%</div>
           <div class="pt bg-success text-white">Sale</div>
         </div>
         <div class="product-image d-flex justify-content-center position-relative" style="width: 100%;">
-          <img src="${productItem.images}" height="200px" width="190px" alt="">
+          <img src="https://freshcart-next-js.vercel.app/images/products/product-img-1.jpg" alt="">
           <div class="shot_cut_icons position-absolute justify-content-center gap-3"
             style="width: 100%; height: max-content;">
             <div class="sc-icons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="18" height="18"
@@ -62,102 +35,49 @@ fetchProducts()
           <p class="mb-1">Snack & Munchies</p>
         </div>
         <div class="product-name">
-          <h4 class="mb-1 mt-2">${productItem.title}</h4>
+          <h4 class="mb-1 mt-2">Haldiram's Sev Bhujia</h4>
         </div>
         <div class="product-rating d-flex justify-content-between">
           <div class="stars">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
-              class="bi bi-star-fill">
+              class="bi bi-star-fill text-warning">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
-              class="bi bi-star-fill">
+              class="bi bi-star-fill text-warning">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
-              class="bi bi-star-fill">
+              class="bi bi-star-fill text-warning">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
-              class="bi bi-star-fill">
+              class="bi bi-star-fill text-warning">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" id="5" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
-              class="bi bi-star-fill">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"
+              class="bi bi-star-fill text-warning">
               <path
                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
               </path>
             </svg>
           </div>
-          <div class="point" id="R_point${productItem.id}">${Math.floor(productItem.rating)}</div>
-        </div>
-         <div class="stok-status">
-          <p>${productItem.availabilityStatus}</p>
+          <div class="point">4.3 (4)</div>
         </div>
         <div class="p-bottom-section d-flex align-items-center justify-content-between mt-3">
-          <div class="price"> <strong>$${productItem.price}</strong> <span class="old-price"> $25.5</span></div>
+          <div class="price">$21.6 <span class="old-price">$25.5</span></div>
           <div class="add-tocart-button">
             <button style="border-radius: 4px;" class="px-3 py-1 text-white">+Add</button>
           </div>
         </div>
       </div>
-          
-          ` 
-        })}
-        
-        `
-      }
-      addProduct_from_api();
 
-
-
-      let productStartRating = document.querySelectorAll(".point");
-      let select_product_star = document.querySelector(".stars");
-   
-      // console.log(select_product_star.children[4]);
-      // let x = productStartRating.innerText;
-      // let y = document.getElementById();
-      // console.log(y)
-      for(let pt = 0; pt<productStartRating.length; pt++){
-         console.log(productStartRating[pt].id);
-         let pd_rating_point_id = document.getElementById(productStartRating[pt].id);
-
-         let rt_point_text = pd_rating_point_id.innerText;
-         
-         let four_star_rating_icons_parent = pd_rating_point_id.parentElement.firstElementChild;
-         
-         if(rt_point_text == 4){
-            console.log("4 star is found");
-            // console.log(pd_rating_point_id.parentElement.firstElementChild);
-              four_star_rating_icons_parent.children[0].style.fill = "#ffa534";
-              four_star_rating_icons_parent.children[1].style.fill = "#ffa534";
-              four_star_rating_icons_parent.children[2].style.fill = "#ffa534";
-              four_star_rating_icons_parent.children[3].style.fill = "#ffa534";
-         }else if(rt_point_text == 3){
-          
-         }
-         else{console.log("nothing")};
-
-
-         
-         
-         console.log(rt_point_text);
-        }
-
-      
-
-
-
-      
-
-   })
-
-
+`;
