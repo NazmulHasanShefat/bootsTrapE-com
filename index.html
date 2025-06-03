@@ -123,7 +123,8 @@
           </svg>
         </div>
 
-        <div role="button" class="m-1 position-relative">
+        <div role="button" class="m-1 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cart_tab"
+          aria-controls="cart_tab">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -136,8 +137,7 @@
           </span>
         </div>
 
-        <div class="m-1 positon-relative menu-toggler d-lg-none" data-bs-target="#main-navigation"
-          data-bs-toggle="offcanvas">
+        <div class="m-1 positon-relative menu-toggler d-lg-none">
           <button type="button" class="btn-nav collapsed" aria-label="Toggle Navigation">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="32" height="32" fill="#0aad0a"
               class="bi bi-text-indent-left text-primary">
@@ -354,6 +354,66 @@
       </div>
     </div>
   </nav>
+
+
+  <!-- cart ofcanvas  -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cart_tab" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <div class="offcanvas-title">
+        <h3 style="font-weight: 600;" class="mb-0">Shop Cart</h3>
+        <p class="mb-0">Location in 382480</p>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- cart notis  -->
+      <div class="alert alert-danger cart_notis" role="alert" style="font-size: 1rem; padding: 8px 18px;">
+        <p class="mb-0">You’ve got <strong>FREE</strong> delivery. Start <a href="">checkout now!</a></p>
+      </div>
+      <!-- cart produts -->
+      <div class="cart-paroduct-container" style="width: 100%;">
+        <div class="cart-product d-flex justify-content-around gap-1 align-items-center" style="width: 100%;">
+          <div class="c-tab-left d-flex justify-content-start gap-2">
+            <div class="cart-product-image"><img
+                src="https://freshcart-next-js.vercel.app/images/products/product-img-1.jpg" height="80" width="80"
+                alt=""></div>
+            <div class="cart-product-details">
+              <strong class="cart-product-name">Haldiram's Sev Bhujia</strong>
+              <p class="mb-0" style="color: rgb(156, 156, 156);">200g</p>
+              <button class="cart-product-remove-btn">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                  Remove
+              </button>
+            </div>
+          </div>
+          <div class="c-tab-right d-flex justify-content-around">
+            <div class="cart-product-quantiti d-flex justify-content-center align-items-center">
+              <button class="cart_p_Quantiti_plus_btn p_m_btn">+</button>
+              <input type="number" class="cart_product_Q_number" value="2" disabled>
+              <button class="cart_p_Quantiti_plus_minus p_m_btn">-</button>
+            </div>
+            <div class="cart-product-total-price"><strong>$832.30</strong></div>
+          </div>
+        </div>
+      </div>
+      <!-- end cart product container -->
+    </div>
+  </div>
+  <!-- cart ofcanvas  -->
+
+  <!-- notify vew cart  -->
+  <div class="vew-cart-notification position-fixed" style="z-index: 9999; bottom: 20px; right: 20px; width: max-content; height: max-content;">
+     <div class="view-cart-noti-card my-2 d-flex px-4 justify-content-center align-items-center" style="width: 100%; height: 65px; border-radius: 25px; border: 1px solid green; background-color: #fff;">
+       <div class="mb-0 d-flex justify-content-center align-items-center"> 
+        <div class="checkMark_v_c_notis d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <p class="mb-1 fs-5" style="font-weight: 400;">add to cart Successful</p>
+      </div>
+       <button>Vew cart</button>
+     </div>
+  </div>
+  <!-- notify vew cart  -->
 
   <main>
     <div class="banar w-100" style="height: max-content;">

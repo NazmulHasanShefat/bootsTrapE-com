@@ -310,3 +310,80 @@
     text-decoration: line-through;
     color: #00000073;
 }
+
+
+// cart tab
+#cart_tab{
+    width: 40%;
+}
+.cart_notis{
+    p{
+        color: rgb(160, 0, 0);
+        font-weight: 500;
+    }
+    a{
+        text-decoration: none;
+        color: rgb(160, 0, 0);
+        font-weight: 700;
+        &:hover{
+            color: rgb(14, 122, 4);
+        }
+    }
+}
+.cart-product{
+    input{
+        width: 35px;
+        height: 35px;
+        padding-left: 10px;
+        padding-right: 0;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.116);
+    }
+    .p_m_btn{
+        width: 35px;
+        height: 35px;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.116);
+        &:hover{
+            background-color: #0103031a;
+        }
+    }
+}
+.c-tab-left, .c-tab-right{
+    width: 50%;
+}
+.cart-product-remove-btn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color:green;
+}
+
+
+.view-cart-noti-card button{
+    margin-left: 20px;
+    font-size: .8rem;
+    color: #fff;
+    background-color: green;
+    border-radius: 9px;
+    padding: 5px 20px;
+}
+.checkMark_v_c_notis{
+    width: 30px;
+    margin-right: 10px;
+    height: 30px;
+    background-color: green;
+    border-radius: 50%;
+    i{
+        color: #fff;
+    }
+}
+.vew-cart-notification{
+    transform: scale(0);
+    transition: .3s ease-in-out;
+}
+@media screen and (max-width:768px) {
+    #cart_tab{
+    width: 90%;
+   }
+}
