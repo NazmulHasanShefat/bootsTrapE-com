@@ -39,7 +39,7 @@ fetchProducts()
           let finalRating = Math.round(x * Math.pow(10,rating_point_length)) / Math.pow(10, rating_point_length);
           // console.log(finalRating);
           return `
-            <div id="prd${productItem.id}" class="product position-relative px-3 py-3 mx-2 my-2" style="width: 18%; height: max-content; border-radius: 8px;">
+            <div id="prd${productItem.id}" class="product position-relative px-3 py-3" style="width: 18.4%; height: max-content; border-radius: 8px;">
         <div class="pro-tags position-absolute" style="z-index: 999; top: 3%; height: max-content;">
           <div class="pt bg-danger text-white mb-2 mt-2">${Math.floor(productItem.discountPercentage)}%</div>
           <div class="pt bg-success text-white">Sale</div>
@@ -116,7 +116,7 @@ fetchProducts()
         <div class="p-bottom-section d-flex align-items-center justify-content-between mt-3">
         <div class="price"> <strong>$${productItem.price}</strong> <span class="old-price"> $25.5</span></div>
           <div class="add-tocart-button">
-            <button style="border-radius: 4px;" class="px-3 py-1 text-white" data-bs-toggle="offcanvas" data-bs-target="#cart_tab" aria-controls="cart_tab" >+Add</button>
+            <button onclick="addToCart()" style="border-radius: 4px;" class="px-3 py-1 text-white">+Add</button>
           </div>
         </div>
       </div>
@@ -231,8 +231,35 @@ fetchProducts()
 
 
 
-        // add to cart functionality
         
-   })
+      })
+      
+      // add to cart functionality
+      function addToCart(){
+        // added to cart notification
+         let vew_cart_notification_panel = document.querySelector(".vew-cart-notification");
+         let v_noti_new_element = document.createElement("div");
+         v_noti_new_element.classList.add("view-cart-noti-card");
+         v_noti_new_element.innerHTML = `
+            <div class="mb-0 d-flex justify-content-center align-items-center"> 
+        <div class="checkMark_v_c_notis d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <p class="mb-1 fs-5" style="font-weight: 400;">add to cart Successful</p>
+      </div>
+       <button data-bs-toggle="offcanvas" data-bs-target="#cart_tab" aria-controls="cart_tab">Vew cart</button>
+         `;
+         vew_cart_notification_panel.appendChild(v_noti_new_element);
+         setTimeout(()=>{
+            v_noti_new_element.style.transform = "scale(1)";
+          },50);
+          setTimeout(()=>{
+           v_noti_new_element.style.transform = "scale(0)";
+         },4000);
 
+
+        //  added to cart functionality
+        
+
+      }
 

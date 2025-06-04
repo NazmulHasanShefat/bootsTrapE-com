@@ -123,8 +123,7 @@
           </svg>
         </div>
 
-        <div role="button" class="m-1 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cart_tab"
-          aria-controls="cart_tab">
+        <div role="button" class="m-1 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cart_tab" aria-controls="cart_tab">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -402,8 +401,8 @@
   <!-- cart ofcanvas  -->
 
   <!-- notify vew cart  -->
-  <div class="vew-cart-notification position-fixed" style="z-index: 9999; bottom: 20px; right: 20px; width: max-content; height: max-content;">
-     <div class="view-cart-noti-card my-2 d-flex px-4 justify-content-center align-items-center" style="width: 100%; height: 65px; border-radius: 25px; border: 1px solid green; background-color: #fff;">
+  <div class="vew-cart-notification position-fixed" style="z-index: 9999; bottom: 20px; right: 20px; width: max-content; max-width: 70%; height: max-content;">
+     <!-- <div class="view-cart-noti-card">
        <div class="mb-0 d-flex justify-content-center align-items-center"> 
         <div class="checkMark_v_c_notis d-flex justify-content-center align-items-center">
           <i class="fa-solid fa-check"></i>
@@ -411,7 +410,7 @@
         <p class="mb-1 fs-5" style="font-weight: 400;">add to cart Successful</p>
       </div>
        <button>Vew cart</button>
-     </div>
+     </div> -->
   </div>
   <!-- notify vew cart  -->
 
@@ -451,7 +450,9 @@
       <h1 class="mb-0 mx-3" style="margin-top: 100px;">Populer products</h1>
     </div>
     <!-- all products -->
-    <div class="products-list-container container d-flex flex-wrap mt-5"></div>
+     <div class="wrap-product-list-container d-flex justify-content-center align-items-center" style="width: 100%;">
+      <div class="products-list-container d-flex gap-3 flex-wrap mt-5" style="width: 88%; margin-left: 40px;"></div>
+     </div>
 
     <footer style="height: 100px; width: 100%;">
 
