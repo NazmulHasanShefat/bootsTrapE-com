@@ -19,7 +19,7 @@ ${Math.floor(productItem.rating)}
 
 
 
-<div class="product position-relative px-3 py-3 mx-2" style="width: 20%; height: max-content; border-radius: 8px;">
+<div id="prd${productItem.id}" class="product position-relative px-3 py-3 mx-2" style="width: 20%; height: max-content; border-radius: 8px;">
         <div class="pro-tags position-absolute" style="z-index: 999; top: 3%; height: max-content;">
           <div class="pt bg-danger text-white mb-2 mt-2">40%</div>
           <div class="pt bg-success text-white">Sale</div>

@@ -39,7 +39,7 @@ fetchProducts()
           let finalRating = Math.round(x * Math.pow(10,rating_point_length)) / Math.pow(10, rating_point_length);
           // console.log(finalRating);
           return `
-            <div id="prd${productItem.id}" class="product position-relative px-3 py-3" style="width: 18.4%; height: max-content; border-radius: 8px;">
+            <div id="${productItem.id}" class="product position-relative px-3 py-3" style="width: 18.4%; height: max-content; border-radius: 8px;">
         <div class="pro-tags position-absolute" style="z-index: 999; top: 3%; height: max-content;">
           <div class="pt bg-danger text-white mb-2 mt-2">${Math.floor(productItem.discountPercentage)}%</div>
           <div class="pt bg-success text-white">Sale</div>
@@ -116,7 +116,7 @@ fetchProducts()
         <div class="p-bottom-section d-flex align-items-center justify-content-between mt-3">
         <div class="price"> <strong>$${productItem.price}</strong> <span class="old-price"> $25.5</span></div>
           <div class="add-tocart-button">
-            <button onclick="addToCart()" style="border-radius: 4px;" class="px-3 py-1 text-white">+Add</button>
+            <button onclick="addToCart(this)" style="border-radius: 4px;" class="px-3 py-1 text-white">+Add</button>
           </div>
         </div>
       </div>
@@ -235,13 +235,69 @@ fetchProducts()
       })
       
       // add to cart functionality
-      function addToCart(){
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cart_container = document.querySelector(".cart-paroduct-container");
+      
+      function save_display_Cart_product_local_storage(){
+        cart_container.innerHTML = "";
+        let product_price_total = 0;
+
+        cart.forEach(cartItem =>{
+          const carttItem_list = document.createElement("div");
+          carttItem_list.innerHTML = `
+              <div class="cart-product d-flex justify-content-around gap-1 align-items-center" style="width: 100%;">
+          <div class="c-tab-left d-flex justify-content-start gap-2">
+            <div class="cart-product-image"><img
+                src="${cartItem.p_image}" height="80" width="80"
+                alt=""></div>
+            <div class="cart-product-details">
+              <strong class="cart-product-name">${cartItem.p_name} ${cartItem}</strong>
+              <p class="mb-0" style="color: rgb(156, 156, 156);">200g</p>
+              <button class="cart-product-remove-btn" onclick="removeCartItem(this,${cartItem.index_num})">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                  Remove
+              </button>
+            </div>
+          </div>
+          <div class="c-tab-right d-flex justify-content-around">
+            <div class="cart-product-quantiti d-flex justify-content-center align-items-center">
+              <button class="cart_p_Quantiti_plus_btn p_m_btn">+</button>
+              <input type="number" class="cart_product_Q_number" value="${cartItem.p_Quantity}" disabled>
+              <button class="cart_p_Quantiti_plus_minus p_m_btn">-</button>
+            </div>
+            <div class="cart-product-total-price"><strong>$${cartItem.p_price * cartItem.p_Quantity}</strong></div>
+          </div>
+        </div>
+          `;
+          cart_container.appendChild(carttItem_list);
+            let cart_items_length = document.querySelector(".cart_items_length");
+            cart_items_length.innerText = cartItem.index_num + 1;
+          
+        })
+        updatelocalStorage();
+      }
+
+      function updatelocalStorage(){
+          localStorage.setItem("cart",JSON.stringify(cart));
+      }
+
+      
+      function removeCartItem(x){
+        let rm_cd_i = x.parentElement.parentElement.parentElement.parentElement;
+        rm_cd_i.remove();
+        cart.splice(x,1);
+        updatelocalStorage();
+      }
+
+      function addToCart(button){
         // added to cart notification
          let vew_cart_notification_panel = document.querySelector(".vew-cart-notification");
+         let all_noti_length = document.querySelectorAll(".nt-card");
          let v_noti_new_element = document.createElement("div");
          v_noti_new_element.classList.add("view-cart-noti-card");
          v_noti_new_element.innerHTML = `
-            <div class="mb-0 d-flex justify-content-center align-items-center"> 
+            <div class="mb-0 d-flex justify-content-center align-items-center nt-card"> 
         <div class="checkMark_v_c_notis d-flex justify-content-center align-items-center">
           <i class="fa-solid fa-check"></i>
         </div>
@@ -251,15 +307,37 @@ fetchProducts()
          `;
          vew_cart_notification_panel.appendChild(v_noti_new_element);
          setTimeout(()=>{
-            v_noti_new_element.style.transform = "scale(1)";
+           v_noti_new_element.style.transform = "scale(1)";
+           vew_cart_notification_panel.style.height = "fit-content";
           },50);
           setTimeout(()=>{
-           v_noti_new_element.style.transform = "scale(0)";
-         },4000);
+            v_noti_new_element.style.transform = "scale(0)";
+            vew_cart_notification_panel.style.height = "0";
+          },4000);
+
+          // end notification section
+          // main section
+          console.log(button.parentElement.parentElement.parentElement.id);
+          let product_name = button.parentElement.parentElement.parentElement.children[3].firstElementChild.innerText;
+          let product_price = button.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
+          let product_image = button.parentElement.parentElement.parentElement.children[1].firstElementChild.src;
 
 
-        //  added to cart functionality
-        
+          let existing_product = cart.find(item => item.p_name === product_name);
 
-      }
+          let cd_length = cart.length;
+          if(existing_product){
+            existing_product.p_Quantity++;
+          }else{
+            cart.push({
+              index_num: cd_length,
+              p_name: product_name,
+              p_image: product_image,
+              p_price: product_price,
+              p_Quantity: 1
+            })
+          }
 
+          save_display_Cart_product_local_storage();
+        }
+        save_display_Cart_product_local_storage();
