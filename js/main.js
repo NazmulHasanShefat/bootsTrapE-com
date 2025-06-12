@@ -114,7 +114,7 @@ fetchProducts()
           <p>${productItem.availabilityStatus}</p>
         </div>
         <div class="p-bottom-section d-flex align-items-center justify-content-between mt-3">
-        <div class="price"> <strong>$${productItem.price}</strong> <span class="old-price"> $25.5</span></div>
+        <div class="price"> $<strong>${productItem.price}</strong> <span class="old-price"> $25.5</span></div>
           <div class="add-tocart-button">
             <button onclick="addToCart(this)" style="border-radius: 4px;" class="px-3 py-1 text-white">+Add</button>
           </div>
@@ -245,6 +245,9 @@ fetchProducts()
 
         cart.forEach(cartItem =>{
           const carttItem_list = document.createElement("div");
+          let v = parseInt(cartItem.p_price);
+          let d = parseInt(cartItem.p_Quantity);
+          let f = v * d;
           carttItem_list.innerHTML = `
               <div class="cart-product d-flex justify-content-around gap-1 align-items-center" style="width: 100%;">
           <div class="c-tab-left d-flex justify-content-start gap-2">
@@ -252,7 +255,7 @@ fetchProducts()
                 src="${cartItem.p_image}" height="80" width="80"
                 alt=""></div>
             <div class="cart-product-details">
-              <strong class="cart-product-name">${cartItem.p_name} ${cartItem}</strong>
+              <strong class="cart-product-name">${cartItem.p_name}</strong>
               <p class="mb-0" style="color: rgb(156, 156, 156);">200g</p>
               <button class="cart-product-remove-btn" onclick="removeCartItem(this,${cartItem.index_num})">
                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
@@ -262,11 +265,11 @@ fetchProducts()
           </div>
           <div class="c-tab-right d-flex justify-content-around">
             <div class="cart-product-quantiti d-flex justify-content-center align-items-center">
-              <button class="cart_p_Quantiti_plus_btn p_m_btn">+</button>
-              <input type="number" class="cart_product_Q_number" value="${cartItem.p_Quantity}" disabled>
-              <button class="cart_p_Quantiti_plus_minus p_m_btn">-</button>
+            <button class="cart_p_Quantiti_plus_minus p_m_btn">-</button>
+            <input type="number" class="cart_product_Q_number" value="${cartItem.p_Quantity}" disabled>
+            <button class="cart_p_Quantiti_plus_btn p_m_btn">+</button>
             </div>
-            <div class="cart-product-total-price"><strong>$${cartItem.p_price * cartItem.p_Quantity}</strong></div>
+            <div class="cart-product-total-price">$<strong id="cart-product${cartItem.index_num}">${f}</strong> <p class="d-none">${cartItem.p_price}</p></div>
           </div>
         </div>
           `;
@@ -275,6 +278,53 @@ fetchProducts()
             cart_items_length.innerText = cartItem.index_num + 1;
           
         })
+        
+      // let cd_Quantity_input = document.querySelector(".")
+      let plus_btn = document.querySelectorAll(".cart_p_Quantiti_plus_btn")
+      let minus_btn = document.querySelectorAll(".cart_p_Quantiti_plus_minus")
+
+      
+      let initValue = 0;
+      // let cart_product_Q_number = document.querySelector(".cart_product_Q_number")
+      plus_btn.forEach(x =>{
+        // calculate cart product price 
+      
+        let cart_product_main = x.parentElement.parentElement.children[1].lastElementChild;
+        let cart_product_total_price = x.parentElement.parentElement.children[1].firstElementChild;
+        let cart_product_total_priceText = x.parentElement.parentElement.children[1].firstElementChild;
+        x.addEventListener("click",()=>{
+          let iValue = parseInt(x.parentElement.children[1].value);
+          let iValueM = x.parentElement.children[1];
+          if(iValue < 10){
+            iValue++
+            iValueM.value = iValue;
+            let p = parseFloat(cart_product_main.innerText);
+            let t = p * iValueM.value;
+            let t_length = 2
+            let final_t = Math.round(t * Math.pow(10 , t_length)) / Math.pow(10,t_length);
+            cart_product_total_price.innerText = final_t;
+          }
+        })
+      })
+      minus_btn.forEach(x =>{
+         let cart_product_main = x.parentElement.parentElement.children[1].lastElementChild;
+        let cart_product_total_price = x.parentElement.parentElement.children[1].firstElementChild;
+        let cart_product_total_priceText = x.parentElement.parentElement.children[1].firstElementChild;
+        x.addEventListener("click",()=>{
+          let iValue2 = parseInt(x.parentElement.children[1].value);
+          let iValueM = x.parentElement.children[1];
+          if(iValue2 > 1){
+            iValue2--
+            iValueM.value = iValue2;
+            let p = parseFloat(cart_product_main.innerText);
+            let t = p * iValueM.value;
+            let t_length = 2
+            let final_t = Math.round(t * Math.pow(10 , t_length)) / Math.pow(10,t_length);
+            cart_product_total_price.innerText = final_t;
+          }
+        })
+      })
+
         updatelocalStorage();
       }
 
@@ -289,6 +339,7 @@ fetchProducts()
         cart.splice(x,1);
         updatelocalStorage();
       }
+      
 
       function addToCart(button){
         // added to cart notification
@@ -317,7 +368,7 @@ fetchProducts()
 
           // end notification section
           // main section
-          console.log(button.parentElement.parentElement.parentElement.id);
+          console.log(button.parentElement.parentElement.firstElementChild.firstElementChild.innerText); 
           let product_name = button.parentElement.parentElement.parentElement.children[3].firstElementChild.innerText;
           let product_price = button.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
           let product_image = button.parentElement.parentElement.parentElement.children[1].firstElementChild.src;
